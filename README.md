@@ -29,7 +29,7 @@ Enter a YouTube video URL and ask any question about the video content. The chat
 ```bash
 git clone https://github.com/yourusername/youtube-transcript-chatbot.git
 cd youtube-transcript-chatbot
-
+```
 
 ## Project Structure 
 
