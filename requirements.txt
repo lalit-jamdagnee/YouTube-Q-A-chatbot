@@ -1,0 +1,22 @@
+# Lanchain Core
+langchain
+langchain-core
+langchain-huggingface
+langchain-community
+langchain-nvidia-ai-endpoints
+
+# Machine Learning Libraries
+numpy 
+pandas
+scikit-learn 
+torch
+
+# Environment Variables Management
+python-dotenv
+
+gradio
+pydantic # Pydantic for data validation
+chromadb # ChromaDB for vector storage
+faiss-cpu # FAISS for efficient similarity search
+youtube-transcript-api # YouTube Transcript API for video transcript retrieval
+ipykernel # IPython kernel for Jupyter Notebook support
