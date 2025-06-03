@@ -267,4 +267,4 @@ if __name__ == "__main__" :
         submit_btn.click(chat_with_youtube, inputs=[url_input, query_input], outputs=output)
 
     # This makes the app work on Render.com / Hugging Face Spaces
-    demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 7860)))
+    demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 8080)))
