@@ -41,15 +41,11 @@ class Indexing:
         return video_id
 
     def transcript(self):
-
-        proxies = GenericProxyConfig(http_url= 'http://103.87.169.243:3128',
-                                     https_url= 'http://103.87.169.243:3128')
         if self._transcript is not None:
             return self._transcript
         try:
             id = self.extract_video_id()
-            yt_api = YouTubeTranscriptApi(proxy_config=proxies)
-            transcript_list = yt_api.get_transcript(video_id=id, languages=['en'])
+            transcript_list = YouTubeTranscriptApi.get_transcript(video_id=id, languages=['en'])
             self._transcript = ' '.join(doc['text'] for doc in transcript_list)
             return self._transcript
         
@@ -81,7 +77,7 @@ class Indexing:
         return chunks
     
     def vectorStore(self):
-        cache_path = f"vectorstore_cache_{self.extract_video_id()}" # unique cache folder per video
+        cache_path = f"./cache/vectorstore_cache_{self.extract_video_id()}" # unique cache folder per video
         
         # Initialize the Huggingface embedding model
         embedding_model = HuggingFaceEmbeddings(
@@ -271,5 +267,4 @@ if __name__ == "__main__" :
         submit_btn = gr.Button("Ask")
         submit_btn.click(chat_with_youtube, inputs=[url_input, query_input], outputs=output)
 
-    # This makes the app work on Render.com / Hugging Face Spaces
-    demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 8080)))
+    demo.launch()
