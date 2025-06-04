@@ -1,6 +1,7 @@
 # Required Libraries
 
 from youtube_transcript_api import TranscriptsDisabled, YouTubeTranscriptApi
+from youtube_transcript_api.proxies import GenericProxyConfig
 from youtube_transcript_api._errors import NoTranscriptFound, VideoUnavailable
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
@@ -40,11 +41,15 @@ class Indexing:
         return video_id
 
     def transcript(self):
+
+        proxies = GenericProxyConfig(http_url= 'http://103.87.169.243:3128',
+                                     https_url= 'http://103.87.169.243:3128')
         if self._transcript is not None:
             return self._transcript
         try:
             id = self.extract_video_id()
-            transcript_list = YouTubeTranscriptApi.get_transcript(video_id=id, languages=['en'])
+            yt_api = YouTubeTranscriptApi(proxy_config=proxies)
+            transcript_list = yt_api.get_transcript(video_id=id, languages=['en'])
             self._transcript = ' '.join(doc['text'] for doc in transcript_list)
             return self._transcript
         
