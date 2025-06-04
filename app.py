@@ -271,4 +271,5 @@ if __name__ == "__main__" :
         submit_btn = gr.Button("Ask")
         submit_btn.click(chat_with_youtube, inputs=[url_input, query_input], outputs=output)
 
-    demo.launch()
+    # This makes the app work on Render.com / Hugging Face Spaces
+    demo.launch(server_name="0.0.0.0", server_port=int(os.environ.get("PORT", 8080)))
